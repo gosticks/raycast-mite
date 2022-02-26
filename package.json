@@ -1,0 +1,99 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "mite",
+  "title": "Mite",
+  "description": "Mite time tracking integration into raycast",
+  "icon": "command-icon.png",
+  "author": "WlaWlaWlad",
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "index",
+      "title": "Add Entry",
+      "description": "Add a new time entry to mite",
+      "mode": "view"
+    },
+    {
+      "name": "showRecent",
+      "title": "Show Recent Entries",
+      "description": "Show todays time entries for current customer",
+      "mode": "view"
+    },
+    {
+      "name": "monthlyReview",
+      "title": "Show Monthly Summary",
+      "description": "Show a quick overview of the current month",
+      "mode": "view"
+    }
+  ],
+  "preferences": [
+    {
+      "name": "token",
+      "type": "password",
+      "required": true,
+      "title": "Personal Access Token",
+      "description": "Mite API token"
+    },
+    {
+      "name": "team",
+      "type": "textfield",
+      "required": true,
+      "title": "Team name",
+      "description": "Mite account/team name"
+    },
+    {
+      "name": "mon",
+      "title": "Monday",
+      "type": "textfield",
+      "default": "8"
+    },
+    {
+      "name": "tue",
+      "title": "Tuesday",
+      "type": "textfield",
+      "default": "8"
+    },
+    {
+      "name": "wed",
+      "title": "Wednesday",
+      "type": "textfield",
+      "default": "8"
+    },
+    {
+      "name": "thu",
+      "title": "Thursday",
+      "type": "textfield",
+      "default": "8"
+    },
+    {
+      "name": "fri",
+      "title": "Friday",
+      "type": "textfield",
+      "default": "8"
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.28.0",
+    "mite-api-ts": "^1.0.5",
+    "node-fetch": "^3.2.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.4.0",
+    "@types/node": "~16.10.0",
+    "@types/react": "^17.0.28",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "jest": "^27.5.1",
+    "prettier": "^2.5.1",
+    "react-devtools": "^4.19.2",
+    "typescript": "^4.4.3"
+  },
+  "scripts": {
+    "build": "ray build -e dist",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint"
+  }
+}
