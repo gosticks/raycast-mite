@@ -20,7 +20,7 @@ type TimeEntryFormState = {
 };
 
 export type TimeEntryFormProps = {
-  initialValues?: MiteTimeEntry;
+  initialValues?: Partial<MiteTimeEntry>;
   submitTitle: string;
   onSubmit: (data: TimeEntrySubmitPayload) => Promise<void>;
 } & Partial<Form.Props>;
