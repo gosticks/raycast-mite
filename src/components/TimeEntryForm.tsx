@@ -111,7 +111,6 @@ export default function TimeEntryForm({ initialValues, onSubmit, submitTitle, ..
 
   return (
     <Form
-      navigationTitle="Create new mite entry"
       isLoading={isLoading}
       actions={
         <ActionPanel>

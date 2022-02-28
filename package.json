@@ -40,36 +40,6 @@
       "required": true,
       "title": "Team name",
       "description": "Mite account/team name"
-    },
-    {
-      "name": "mon",
-      "title": "Monday",
-      "type": "textfield",
-      "default": "8"
-    },
-    {
-      "name": "tue",
-      "title": "Tuesday",
-      "type": "textfield",
-      "default": "8"
-    },
-    {
-      "name": "wed",
-      "title": "Wednesday",
-      "type": "textfield",
-      "default": "8"
-    },
-    {
-      "name": "thu",
-      "title": "Thursday",
-      "type": "textfield",
-      "default": "8"
-    },
-    {
-      "name": "fri",
-      "title": "Friday",
-      "type": "textfield",
-      "default": "8"
     }
   ],
   "dependencies": {

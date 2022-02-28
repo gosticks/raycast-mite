@@ -1,8 +1,9 @@
 import { ActionPanel, Action, Color, List, Icon, showToast } from "@raycast/api";
 import { MiteTimeEntryResponse, MiteTrackingTimeEntry } from "mite-api-ts";
 import { useEffect, useState } from "react";
+import CreateEntry from "./components/CreateEntry";
 import EditEntry from "./components/EditEntry";
-import { toHours } from "./utils";
+import { createTemplateFromEntry, toHours } from "./utils";
 import { getEntryUrl, useMiteClient } from "./utils/client";
 
 export default function Command() {
@@ -72,6 +73,11 @@ export default function Command() {
                   actions={
                     <ActionPanel title="Modify">
                       <Action.Push target={<EditEntry entry={entry} />} title="Edit" icon={Icon.Pencil} />
+                      <Action.Push
+                        target={<CreateEntry entry={createTemplateFromEntry(entry)} />}
+                        title="Use as template"
+                        icon={Icon.Pin}
+                      />
                       {entry.date_at && <Action.OpenInBrowser url={getEntryUrl(entry)} title="Open in Mite" />}
                       <Action.SubmitForm
                         icon={{
