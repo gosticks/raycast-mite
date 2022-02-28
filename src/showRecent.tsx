@@ -54,8 +54,9 @@ export default function Command() {
     <>
       <List isLoading={isLoading}>
         {entriesGrouped &&
-          Object.entries(entriesGrouped).map(([date, entries]) => (
+          Object.entries(entriesGrouped).map(([date, entries], index) => (
             <List.Section
+              key={date + index}
               title={date}
               subtitle={`(${toHours(entries.reduce((acc, cur) => acc + cur.time_entry.minutes, 0))})`}
             >
