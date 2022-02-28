@@ -67,7 +67,7 @@ export default function Command() {
                     tintColor: tracker?.id === entry.id ? Color.Yellow : Color.Blue,
                   }}
                   key={entry.id}
-                  keywords={[entry.note]}
+                  keywords={[entry.note, date, date.replace("-", ".")]}
                   title={`${entry.project_name} / ${entry.project_name}`}
                   subtitle={entry.note}
                   accessoryTitle={toHours(entry.minutes)}
