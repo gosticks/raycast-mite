@@ -5,7 +5,7 @@ import { MiteClient, MiteTimeEntry, MiteTimeEntryResponse } from "mite-api-ts";
 
 const MITE_APP_NAME = "raycast-www-v0";
 
-type MiteAtOption = "today" | "this_week" | "this_month" | "this_year" | "last_year" | "last-month";
+type MiteAtOption = "today" | "this_week" | "this_month" | "this_year" | "last_year" | "last_month";
 
 export const getEntryUrl = (entry: MiteTimeEntry) => {
   const preferences = getPreferenceValues();

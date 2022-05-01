@@ -90,6 +90,28 @@ export default function Command() {
     (prev, cur) => ((prev?.time_entry.minutes ?? 0) < cur.time_entry.minutes ? cur : prev),
     undefined as MiteTimeEntryResponse | undefined
   );
+
+  const D = Detail as any;
+
+  const metadata = (
+    <D.Metadata>
+      <D.Metadata.Label
+        title="Weekly Split (hours per weekday)"
+        text={`${WORKING_WEEK_CONFIG[0]} ${WORKING_WEEK_CONFIG[1]} ${WORKING_WEEK_CONFIG[2]} ${WORKING_WEEK_CONFIG[3]} ${WORKING_WEEK_CONFIG[4]} ${WORKING_WEEK_CONFIG[5]} ${WORKING_WEEK_CONFIG[6]}`}
+      />
+      <D.Metadata.Label
+        title="Weekly avg. (should vs actual)"
+        text={`${WORKING_WEEK_CONFIG.reduce((acc, cur) => acc + cur, 0)}h / ${(
+          totalWorkedTime / getWeek(new Date())
+        ).toFixed(2)}h`}
+      />
+      <D.Metadata.Label
+        title={`Longest entry (${(longestTimeEntry?.time_entry.minutes ?? 0) / 60}h)`}
+        text={`${longestTimeEntry?.time_entry.note} `}
+      />
+    </D.Metadata>
+  ) as any;
+
   useEffect(() => {
     getTotalWorkTimeRequired().then((resp) => setTotalWorkTime(resp));
     client
@@ -103,7 +125,8 @@ export default function Command() {
       });
   }, []);
   return (
-    <Detail
+    <D
+      metadata={metadata}
       markdown={`
   # Yearly Review (${new Date().getFullYear()})\n\n
   Total mite entries: **${entries.length}**\n
@@ -116,24 +139,6 @@ export default function Command() {
   --------------------------------------------------
   Overtime: ${overtime.toFixed(2)}h -> ${(overtime / 8).toFixed(2)}days\n
   `}
-      metadata={
-        <Detail.Metadata>
-          <Detail.Metadata.Label
-            title="Weekly Split (hours per weekday)"
-            text={`${WORKING_WEEK_CONFIG[0]} ${WORKING_WEEK_CONFIG[1]} ${WORKING_WEEK_CONFIG[2]} ${WORKING_WEEK_CONFIG[3]} ${WORKING_WEEK_CONFIG[4]} ${WORKING_WEEK_CONFIG[5]} ${WORKING_WEEK_CONFIG[6]}`}
-          />
-          <Detail.Metadata.Label
-            title="Weekly avg. (should vs actual)"
-            text={`${WORKING_WEEK_CONFIG.reduce((acc, cur) => acc + cur, 0)}h / ${(
-              totalWorkedTime / getWeek(new Date())
-            ).toFixed(2)}h`}
-          />
-          <Detail.Metadata.Label
-            title={`Longest entry (${(longestTimeEntry?.time_entry.minutes ?? 0) / 60}h)`}
-            text={`${longestTimeEntry?.time_entry.note} `}
-          />
-        </Detail.Metadata>
-      }
     />
   );
 }

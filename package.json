@@ -20,9 +20,9 @@
       "mode": "view"
     },
     {
-      "name": "yearlyReview",
-      "title": "Show Yearly Summary",
-      "description": "Show a quick overview of the current year",
+      "name": "monthlyReview",
+      "title": "Show Monthly Summary",
+      "description": "Show a quick overview of the current month",
       "mode": "view"
     }
   ],

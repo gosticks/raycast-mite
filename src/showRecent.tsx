@@ -14,9 +14,9 @@ export default function Command() {
 
   useEffect(() => {
     setIsLoading(true);
-    Promise.all([client.getMyEntriesGroupedByDay(), client.getTracker()])
-      .then(([entries, tracker]) => {
-        setEntries(entries ?? []);
+    Promise.all([client.getMyEntriesGroupedByDay("last_month"), client.getMyEntriesGroupedByDay(), client.getTracker()])
+      .then(([lastEntries, entries, tracker]) => {
+        setEntries({ ...(lastEntries ?? {}), ...(entries ?? {}) });
         setTracker(tracker?.tracking_time_entry ?? null);
       })
       .catch((e) => {
