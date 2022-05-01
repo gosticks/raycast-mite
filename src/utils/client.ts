@@ -1,7 +1,7 @@
 import { getPreferenceValues, PreferenceValues } from "@raycast/api";
 import fetch from "node-fetch";
 import { useMemo } from "react";
-import { MiteClient, MiteTimeEntry, MiteTimeEntryResponse, MiteUngroupedTimeEntry } from "mite-api-ts";
+import { MiteClient, MiteTimeEntry, MiteTimeEntryResponse } from "mite-api-ts";
 
 const MITE_APP_NAME = "raycast-www-v0";
 
@@ -50,6 +50,12 @@ class CustomMiteClient extends MiteClient {
         }),
         {} as Record<string, MiteTimeEntryResponse[]>
       )
+    );
+  }
+
+  async getYearlyTimeEntries(year: number) {
+    return this.request(`/time_entries.json?user_id=current&from=${year}-${1}-01&to=${year}-${12}-31`).then(
+      (res) => res.json() as Promise<MiteTimeEntryResponse[]>
     );
   }
 
