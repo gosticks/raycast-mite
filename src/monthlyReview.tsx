@@ -6,7 +6,7 @@ import { getHolidays, HolidayItem } from "./utils/holidays";
 
 type WeekArray = [number, number, number, number, number, number, number];
 
-const WORKING_WEEK_CONFIG: WeekArray = [8, 8, 8, 8, 8, 0, 0];
+const WORKING_WEEK_CONFIG: WeekArray = [4, 0, 8, 8, 0, 0, 0];
 
 // This script is released to the public domain and may be used, modified and
 // distributed without restrictions. Attribution not necessary but appreciated.
@@ -66,7 +66,9 @@ const getTotalWorkTimeRequired = async (
     if (day >= fromDate && day <= toDate) {
       const dayIndex = day.getDay() == 0 ? 6 : day.getDay() - 1;
       days[dayIndex] -= 1;
-      accountedHolidays.push({ ...holiday, hoursReduced: workTimes[dayIndex] });
+      if (workTimes[dayIndex] > 0) {
+        accountedHolidays.push({ ...holiday, hoursReduced: workTimes[dayIndex] });
+      }
     }
   });
   // compute total hours
@@ -135,7 +137,10 @@ export default function Command() {
   --------------------------------------------------
   Total should have worked: **${totalWorkTime?.total ?? "loading..."}h**\n
   Accounted hollidays: **${totalWorkTime?.accountedHolidays.length ?? "loading..."}**\n 
-  ${totalWorkTime?.accountedHolidays?.map((holiday) => `${holiday.fname}(${holiday.date})\n`) ?? "loading..."}
+  ${
+    totalWorkTime?.accountedHolidays?.reduce((acc, holiday) => acc + `- ${holiday.fname} (${holiday.date})\n`, "") ??
+    "loading..."
+  }
   --------------------------------------------------
   Overtime: ${overtime.toFixed(2)}h -> ${(overtime / 8).toFixed(2)}days\n
   `}
