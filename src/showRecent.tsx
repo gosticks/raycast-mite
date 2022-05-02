@@ -16,7 +16,7 @@ export default function Command() {
     setIsLoading(true);
     Promise.all([client.getMyEntriesGroupedByDay("last_month"), client.getMyEntriesGroupedByDay(), client.getTracker()])
       .then(([lastEntries, entries, tracker]) => {
-        setEntries({ ...(lastEntries ?? {}), ...(entries ?? {}) });
+        setEntries({ ...(entries ?? {}), ...(lastEntries ?? {}) });
         setTracker(tracker?.tracking_time_entry ?? null);
       })
       .catch((e) => {
